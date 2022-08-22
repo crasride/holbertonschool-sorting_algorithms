@@ -7,12 +7,14 @@ size_t Osize;
 
 void quick_sort(int *array, size_t size)
 {
-	int pivot = array[size - 1];
+	int pivot;
 	int end = size - 2;
 	int beg = 0;
 	int tmp;
 
-
+	if (!array || size <= 1)
+		return;
+	pivot  = array[size - 1];
 	if (!Oarray)
 	{
 		Oarray = array;
