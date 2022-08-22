@@ -22,11 +22,11 @@ void quick_sort(int *array, size_t size)
 	}
 	while (1)
 	{
-		while (array[end] > pivot && end > -1)
+		while (array[end] >= pivot && end > -1)
 			end--;
 		if (end == -1)
 			break;
-		while (array[beg] < pivot && beg < end)
+		while (array[beg] <= pivot && beg < end)
 			beg ++;
 		if (end == beg)
 			break;
