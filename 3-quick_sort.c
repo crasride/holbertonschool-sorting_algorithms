@@ -2,14 +2,21 @@
 #include <stdio.h>
 #include "sort.h"
 
-int *Oarray = NULL;
-size_t Osize;
+static int *Oarray;
+static size_t Osize;
 
+/**
+ * quick_sort - recursif sorting algorithim based on a pivot
+ *
+ * @array: array to sort
+ * @size: size of array
+ * Return: void
+ */
 void quick_sort(int *array, size_t size)
 {
 	int pivot;
-	int end = size - 2;
-	int beg = 0;
+	unsigned int Pos = 0;
+	unsigned int TmpP = 0;
 	int tmp;
 
 	if (!array || size <= 1)
@@ -20,30 +27,31 @@ void quick_sort(int *array, size_t size)
 		Oarray = array;
 		Osize = size;
 	}
-	while (1)
+	while (TmpP < size - 1)
 	{
-		while (array[end] >= pivot && end > -1)
-			end--;
-		if (end == -1)
+		TmpP = Pos;
+		while (array[TmpP] < pivot)
+			TmpP++;
+		if (TmpP == size - 1)
+		{
+			quick_sort(array, size - 1);
 			break;
-		while (array[beg] <= pivot && beg < end)
-			beg ++;
-		if (end == beg)
-			break;
-		tmp = array[end];
-		array[end] = array[beg];
-		array[beg] = tmp;
-		print_array(Oarray, Osize);
+		}
+		Pos = TmpP;
+		while (array[TmpP] >= pivot && TmpP < size - 1)
+			TmpP++;
+		if (array[Pos] != array[TmpP])
+		{
+			tmp = array[Pos];
+			array[Pos] = array[TmpP];
+			array[TmpP] = tmp;
+			print_array(Oarray, Osize);
+		}
 	}
-	end++;
-	if ((size_t)end != size - 1 && array[size - 1] != array[end])
-	{
-		array[size - 1] = array[end];
-		array[end] = pivot;
-		print_array(Oarray, Osize);
-	}
-	if (end > 1)
-		quick_sort(array, end);
-	if ((size_t)end < size - 2)
-		quick_sort(array + end + 1, size - end - 1);
+	if (Pos > 1)
+		quick_sort(array, Pos);
+	while (array[Pos + 1] == pivot)
+		Pos++;
+	if (Pos < size - 2)
+		quick_sort(array + Pos + 1, size - Pos - 1);
 }
