@@ -36,7 +36,7 @@ void quick_sort(int *array, size_t size)
 		print_array(Oarray, Osize);
 	}
 	end++;
-	if ((size_t)end != size - 1)
+	if ((size_t)end != size - 1 && array[size - 1] != array[end])
 	{
 		array[size - 1] = array[end];
 		array[end] = pivot;
