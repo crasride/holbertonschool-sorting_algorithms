@@ -12,12 +12,13 @@ void quick_sort(int *array, size_t size)
 	int beg = 0;
 	int tmp;
 
+
 	if (!Oarray)
 	{
 		Oarray = array;
 		Osize = size;
 	}
-	while (end != beg)
+	while (1)
 	{
 		while (array[end] > pivot && end > -1)
 			end--;
@@ -25,6 +26,8 @@ void quick_sort(int *array, size_t size)
 			break;
 		while (array[beg] < pivot && beg < end)
 			beg ++;
+		if (end == beg)
+			break;
 		tmp = array[end];
 		array[end] = array[beg];
 		array[beg] = tmp;
